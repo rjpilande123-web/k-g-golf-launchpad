@@ -8,63 +8,76 @@ interface Product {
   category: string;
   status: string;
   colors: string[];
+  hexcode: string[];
   images: string[];
 }
 
-const menProducts = (productsData as Product[])
-  .filter((p) => p.category === "men")
-  .slice(0, 4);
+const allProducts = productsData as Product[];
 
-const womenProducts = (productsData as Product[])
-  .filter((p) => p.category === "women")
-  .slice(0, 4);
+const getProductsByCategory = (category: string, count = 4) =>
+  allProducts.filter((p) => p.category === category).slice(0, count);
 
-const ProductRow = ({ title: sectionTitle, subtitle, products }: { title: string; subtitle: string; products: Product[] }) => (
-  <section className="py-16 px-6">
-    <p className="text-center text-xs font-body tracking-[0.3em] uppercase text-muted-foreground mb-2">
-      {subtitle}
-    </p>
-    <h2 className="font-heading text-3xl sm:text-4xl text-center mb-10">
-      {sectionTitle}
-    </h2>
-    <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
-      {products.map((product) => (
-        <a key={product.id} href="#" className="group block">
-          <div className="relative aspect-square overflow-hidden bg-secondary">
-            <div className="w-full h-full flex items-center justify-center bg-secondary text-muted-foreground text-xs font-body">
-              {product.name}
-            </div>
-            <button
-              className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors"
-              aria-label="Add to wishlist"
-            >
-              <Heart size={18} />
-            </button>
-          </div>
-          <p className="mt-3 text-sm font-body">{product.name}</p>
-          <p className="text-sm font-body text-muted-foreground">₱{product.price}</p>
-        </a>
-      ))}
-    </div>
-    <div className="text-center mt-8">
-      <a
-        href="#"
-        className="inline-block border border-foreground px-8 py-3 text-sm font-body tracking-widest uppercase hover:bg-foreground hover:text-background transition-colors"
-      >
-        Shop Now
-      </a>
-    </div>
-  </section>
-);
+interface ProductRowProps {
+  title: string;
+  subtitle: string;
+  category: string;
+  count?: number;
+}
 
-const FeaturedProducts = () => {
+export const ProductRow = ({ title, subtitle, category, count = 4 }: ProductRowProps) => {
+  const products = getProductsByCategory(category, count);
+
+  if (products.length === 0) return null;
+
   return (
-    <>
-      <ProductRow title="New This Season" subtitle="Men" products={menProducts} />
-      <div className="border-t border-border" />
-      <ProductRow title="Spring Essentials" subtitle="Women" products={womenProducts} />
-    </>
+    <section className="py-16 px-6">
+      <p className="text-center text-xs font-body tracking-[0.3em] uppercase text-muted-foreground mb-2">
+        {subtitle}
+      </p>
+      <h2 className="font-heading text-3xl sm:text-4xl text-center mb-10">
+        {title}
+      </h2>
+      <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
+        {products.map((product) => (
+          <a key={product.id} href="#" className="group block">
+            <div className="relative aspect-square overflow-hidden bg-secondary">
+              <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs font-body p-4 text-center">
+                {product.name}
+              </div>
+              <button
+                className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="Add to wishlist"
+              >
+                <Heart size={18} />
+              </button>
+              {product.hexcode.length > 0 && (
+                <div className="absolute bottom-3 left-3 flex gap-1">
+                  {product.hexcode.slice(0, 4).map((hex, i) => (
+                    <span
+                      key={i}
+                      className="w-4 h-4 rounded-full border border-border"
+                      style={{ backgroundColor: hex }}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+            <p className="mt-3 text-sm font-body">{product.name}</p>
+            <p className="text-sm font-body text-muted-foreground">₱{product.price}</p>
+          </a>
+        ))}
+      </div>
+      <div className="text-center mt-8">
+        <a
+          href="#"
+          className="inline-block border border-foreground px-8 py-3 text-sm font-body tracking-widest uppercase hover:bg-foreground hover:text-background transition-colors"
+        >
+          Shop Now
+        </a>
+      </div>
+    </section>
   );
 };
 
+const FeaturedProducts = () => null;
 export default FeaturedProducts;
