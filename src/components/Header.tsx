@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Menu, Search, Heart, User, ShoppingBag, X, ChevronDown, ChevronUp } from "lucide-react";
+import { Menu, Search, X, ChevronDown, ChevronUp } from "lucide-react";
 
 const navItems = [
   { label: "Home", href: "#" },
@@ -26,19 +26,14 @@ const Header = () => {
     <>
       <header className="sticky top-0 z-50 bg-background border-b border-border">
         <div className="flex items-center justify-between px-6 py-4">
-          {/* Left: Menu + Search */}
-          <div className="flex items-center gap-4">
+          {/* Left: Menu */}
+          <div className="flex items-center">
             <button
               onClick={() => setMenuOpen(true)}
               className="flex items-center gap-2 text-foreground hover:text-muted-foreground transition-colors"
               aria-label="Open menu"
             >
               <Menu size={20} />
-              <span className="hidden sm:inline text-sm font-body tracking-widest uppercase">Menu</span>
-            </button>
-            <button className="flex items-center gap-2 text-foreground hover:text-muted-foreground transition-colors">
-              <Search size={20} />
-              <span className="hidden sm:inline text-sm font-body tracking-widest uppercase">Search</span>
             </button>
           </div>
 
@@ -47,19 +42,11 @@ const Header = () => {
             K&G
           </h1>
 
-          {/* Right: Actions */}
-          <div className="flex items-center gap-4">
-            <span className="hidden md:inline text-sm font-body tracking-widest uppercase cursor-pointer hover:text-muted-foreground transition-colors">
-              Contact Us
-            </span>
-            <Heart size={20} className="cursor-pointer hover:text-muted-foreground transition-colors" />
-            <User size={20} className="cursor-pointer hover:text-muted-foreground transition-colors" />
-            <div className="relative cursor-pointer hover:text-muted-foreground transition-colors">
-              <ShoppingBag size={20} />
-              <span className="absolute -top-1 -right-2 text-[10px] font-body bg-accent text-accent-foreground rounded-full w-4 h-4 flex items-center justify-center">
-                0
-              </span>
-            </div>
+          {/* Right: Search */}
+          <div className="flex items-center">
+            <button className="flex items-center gap-2 text-foreground hover:text-muted-foreground transition-colors">
+              <Search size={20} />
+            </button>
           </div>
         </div>
       </header>
@@ -67,12 +54,10 @@ const Header = () => {
       {/* Mobile Menu Overlay */}
       {menuOpen && (
         <div className="fixed inset-0 z-[100]">
-          {/* Backdrop */}
           <div
             className="absolute inset-0 bg-foreground/30 animate-fade-in"
             onClick={() => { setMenuOpen(false); setProductsOpen(false); }}
           />
-          {/* Drawer */}
           <nav className="absolute top-0 left-0 h-full w-80 max-w-[85vw] bg-background shadow-2xl animate-slide-in flex flex-col">
             <div className="flex items-center justify-between p-6 border-b border-border">
               <span className="font-heading text-lg font-semibold tracking-wider uppercase">K&G</span>
