@@ -23,10 +23,10 @@ export const gearCategories = [allCategories.Accessories, allCategories.Bags];
 const CategoryGrid = ({ title, categories }: CategoryGridProps) => {
   return (
     <section className="py-16 px-6">
-      <h2 className="font-heading text-3xl sm:text-4xl text-center mb-12">
+      <h2 className="font-heading text-3xl text-center mb-12">
         {title}
       </h2>
-      <div className={`max-w-[1400px] mx-auto grid grid-cols-${categories.length > 2 ? '3' : '2'} gap-4`}>
+      <div className={`max-w-[1400px] mx-auto grid ${categories.length > 2 ? "grid-cols-3" : "grid-cols-2"} gap-4`}>
         {categories.map((cat) => (
           <a key={cat.name} href="#" className="group block">
             <div className="aspect-square overflow-hidden bg-secondary">

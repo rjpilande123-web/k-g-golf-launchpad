@@ -1,11 +1,24 @@
 import { Heart } from "lucide-react";
 import productsData from "@/data/products.json";
 
+const imageModules = import.meta.glob(
+  "@/assets/images/products/*",
+  { eager: true, import: "default" }
+) as Record<string, string>;
+
+const imageMap: Record<string, string> = {};
+
+Object.entries(imageModules).forEach(([path, url]) => {
+  const filename = path.split("/").pop() as string;
+  imageMap[filename] = url;
+});
+
 interface Product {
   id: string;
   name: string;
   price: string;
   category: string;
+  subcategory: string;
   status: string;
   colors: string[];
   hexcode: string[];
@@ -40,7 +53,13 @@ export const ProductRow = ({ title, subtitle, category, count = 4 }: ProductRowP
       <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
         {products.map((product) => (
           <a key={product.id} href="#" className="group block">
-            <div className="relative aspect-square overflow-hidden bg-secondary">
+            <div className="relative overflow-hidden bg-white">
+            <img
+              src={imageMap[product.images[0]]}
+              alt={product.name}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
               <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs font-body p-4 text-center">
                 {product.name}
               </div>
@@ -63,7 +82,7 @@ export const ProductRow = ({ title, subtitle, category, count = 4 }: ProductRowP
               )}
             </div>
             <p className="mt-3 text-sm font-body">{product.name}</p>
-            <p className="text-sm font-body text-muted-foreground">₱{product.price}</p>
+            <p className="text-sm font-body text-muted-foreground capitalize">{product.subcategory}</p>
           </a>
         ))}
       </div>

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 import { Menu, Search, X, ChevronDown, ChevronUp } from "lucide-react";
 
 const navItems = [
@@ -21,37 +22,56 @@ const navItems = [
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
+  
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-background border-b border-border">
-        <div className="flex items-center justify-between px-6 py-4">
-          {/* Left: Menu */}
+      <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-white shadow-md"
+          : "bg-transparent"
+      }`}>
+        <div className="flex items-center justify-between p-6">
           <div className="flex items-center">
             <button
               onClick={() => setMenuOpen(true)}
-              className="flex items-center gap-2 text-foreground hover:text-muted-foreground transition-colors"
+              className={`flex font-body items-center gap-2 text-foreground hover:text-muted-foreground transition-colors uppercase text-xs ${
+                scrolled
+                  ? ""
+                  : "text-white"
+              }`}
               aria-label="Open menu"
             >
-              <Menu size={20} />
+              <Menu size={20} /> menu
             </button>
           </div>
 
-          {/* Center: Logo */}
-          <h1 className="font-heading text-xl sm:text-2xl md:text-3xl font-bold tracking-wider uppercase">
+          <h1 className={`font-body text-xl sm:text-2xl md:text-3xl font-bold tracking-wider uppercase ${ scrolled ? "" : "text-white"}`}>
             K&G
           </h1>
 
-          {/* Right: Search */}
           <div className="flex items-center">
-            <button className="flex items-center gap-2 text-foreground hover:text-muted-foreground transition-colors">
-              <Search size={20} />
+            <button className={`flex font-body items-center gap-2 text-foreground hover:text-muted-foreground transition-colors uppercase text-xs ${
+                scrolled
+                  ? ""
+                  : "text-white"
+              }`}>
+              <Search size={20} /> search
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile Menu Overlay */}
       {menuOpen && (
         <div className="fixed inset-0 z-[100]">
           <div

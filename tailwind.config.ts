@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        heading: ['Playfair Display', 'Georgia', 'serif'],
-        body: ['Lato', 'Helvetica Neue', 'sans-serif'],
+        heading: ['Lexend', 'Lexend', 'sans-serif'],
+        body: ['Lexend', 'Lexend', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

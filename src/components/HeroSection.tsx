@@ -1,14 +1,18 @@
-import heroImage from "@/assets/hero-golf.jpg";
+import video from "@/assets/video/hero-video.mp4";
+import Header from "./Header";
 
 const HeroSection = () => {
   return (
-    <section className="relative w-full h-[85vh] overflow-hidden">
-      <img
-        src={heroImage}
-        alt="K&G Golfing Apparel - Premium Golf Fashion"
-        className="w-full h-full object-cover"
-        loading="eager"
-      />
+    <section className="relative w-full h-screen overflow-hidden">
+      <Header/>
+      <video
+          className="w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          src={video}
+        />
       <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent" />
       <div className="absolute bottom-12 left-0 right-0 text-center">
         <p className="text-sm font-body tracking-[0.3em] uppercase text-primary-foreground/80 mb-3">
