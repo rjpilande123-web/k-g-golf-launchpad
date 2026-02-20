@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import productPolo from "@/assets/product-polo.jpg";
 import heroWomen from "@/assets/hero-women.jpg";
 import categoryKids from "@/assets/category-kids.jpg";
@@ -28,7 +29,7 @@ const CategoryGrid = ({ title, categories }: CategoryGridProps) => {
       </h2>
       <div className={`max-w-[1400px] mx-auto grid ${categories.length > 2 ? "grid-cols-3" : "grid-cols-2"} gap-4`}>
         {categories.map((cat) => (
-          <a key={cat.name} href="#" className="group block">
+          <Link key={cat.name} to={`/products?category=${cat.name.toLowerCase()}`} className="group block">
             <div className="aspect-square overflow-hidden bg-secondary">
               <img
                 src={cat.image}
@@ -40,7 +41,7 @@ const CategoryGrid = ({ title, categories }: CategoryGridProps) => {
             <p className="mt-3 text-center text-sm font-body tracking-widest uppercase">
               {cat.name}
             </p>
-          </a>
+          </Link>
         ))}
       </div>
     </section>
