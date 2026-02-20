@@ -1,4 +1,5 @@
 import { Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 import productsData from "@/data/products.json";
 
 const imageModules = import.meta.glob(
@@ -52,7 +53,7 @@ export const ProductRow = ({ title, subtitle, category, count = 4 }: ProductRowP
       </h2>
       <div className="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
         {products.map((product) => (
-          <a key={product.id} href="#" className="group block">
+          <Link to={`/products/${product.id}`} key={product.id} className="group block">
             <div className="relative overflow-hidden bg-white">
             <img
               src={imageMap[product.images[0]]}
@@ -82,8 +83,8 @@ export const ProductRow = ({ title, subtitle, category, count = 4 }: ProductRowP
               )}
             </div>
             <p className="mt-3 text-sm font-body">{product.name}</p>
-            <p className="text-sm font-body text-muted-foreground capitalize">{product.subcategory}</p>
-          </a>
+            <p className="text-sm font-body text-muted-foreground">₱{product.price}</p>
+          </Link>
         ))}
       </div>
       <div className="text-center mt-8">

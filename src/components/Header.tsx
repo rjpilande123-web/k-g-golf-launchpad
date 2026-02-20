@@ -1,54 +1,56 @@
 import { useState, useEffect } from "react";
-
+import { useNavigate, Link } from "react-router-dom";
 import { Menu, Search, X, ChevronDown, ChevronUp } from "lucide-react";
 
 const navItems = [
-  { label: "Home", href: "#" },
+  { label: "Home", href: "/" },
   {
     label: "Products",
-    href: "#",
+    href: "/products",
     subcategories: [
-      { label: "Men", href: "#men" },
-      { label: "Women", href: "#women" },
-      { label: "Kids", href: "#kids" },
-      { label: "Accessories", href: "#accessories" },
-      { label: "Bags", href: "#bags" },
+      { label: "Men", href: "/products?category=men" },
+      { label: "Women", href: "/products?category=women" },
+      { label: "Kids", href: "/products?category=kids" },
+      { label: "Accessories", href: "/products?category=accessories" },
+      { label: "Bags", href: "/products?category=bags" },
     ],
   },
-  { label: "About Us", href: "#about" },
-  { label: "Contact Us", href: "#contact" },
+  { label: "About Us", href: "/about" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [productsOpen, setProductsOpen] = useState(false);
-  
   const [scrolled, setScrolled] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const navigate = useNavigate();
+
+  const active = scrolled || hovered;
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
     <>
-      <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white shadow-md"
-          : "bg-transparent"
-      }`}>
+      <header
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+          active ? "bg-white shadow-md" : "bg-transparent"
+        }`}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
         <div className="flex items-center justify-between p-6">
           <div className="flex items-center">
             <button
               onClick={() => setMenuOpen(true)}
               className={`flex font-body items-center gap-2 text-foreground hover:text-muted-foreground transition-colors uppercase text-xs ${
-                scrolled
-                  ? ""
-                  : "text-white"
+                active ? "" : "text-white"
               }`}
               aria-label="Open menu"
             >
@@ -56,15 +58,13 @@ const Header = () => {
             </button>
           </div>
 
-          <h1 className={`font-body text-xl sm:text-2xl md:text-3xl font-bold tracking-wider uppercase ${ scrolled ? "" : "text-white"}`}>
+          <Link to="/" className={`font-body text-xl sm:text-2xl md:text-3xl font-bold tracking-wider uppercase ${active ? "" : "text-white"}`}>
             K&G
-          </h1>
+          </Link>
 
           <div className="flex items-center">
             <button className={`flex font-body items-center gap-2 text-foreground hover:text-muted-foreground transition-colors uppercase text-xs ${
-                scrolled
-                  ? ""
-                  : "text-white"
+                active ? "" : "text-white"
               }`}>
               <Search size={20} /> search
             </button>
@@ -104,26 +104,26 @@ const Header = () => {
                         <ul className="bg-secondary/50">
                           {item.subcategories.map((sub) => (
                             <li key={sub.label}>
-                              <a
-                                href={sub.href}
+                              <Link
+                                to={sub.href}
                                 className="block px-10 py-3 text-sm font-body tracking-wider hover:bg-secondary transition-colors"
                                 onClick={() => { setMenuOpen(false); setProductsOpen(false); }}
                               >
                                 {sub.label}
-                              </a>
+                              </Link>
                             </li>
                           ))}
                         </ul>
                       )}
                     </>
                   ) : (
-                    <a
-                      href={item.href}
+                    <Link
+                      to={item.href}
                       className="block px-6 py-4 text-sm font-body tracking-widest uppercase hover:bg-secondary transition-colors"
                       onClick={() => { setMenuOpen(false); setProductsOpen(false); }}
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   )}
                 </li>
               ))}
