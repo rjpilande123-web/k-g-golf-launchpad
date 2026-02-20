@@ -12,10 +12,12 @@ const Index = () => {
 
         {/* Apparel Categories */}
         <CategoryGrid title="Shop by Category" categories={apparelCategories} />
-
+        <div className="w-full h-screen bg-secondary"></div>
         {/* Men Highlights */}
         <ProductRow title="New This Season" subtitle="Men" category="men" />
         <div className="border-t border-border" />
+
+        <div className="w-full h-screen bg-secondary"></div>
 
         {/* Women Highlights */}
         <ProductRow title="Spring Essentials" subtitle="Women" category="women" />
@@ -28,9 +30,13 @@ const Index = () => {
         {/* Gear Categories */}
         <CategoryGrid title="Shop by Category" categories={gearCategories} />
 
+        <div className="w-full h-screen bg-secondary"></div>
+
         {/* Accessories Highlights */}
         <ProductRow title="Complete Your Look" subtitle="Accessories" category="accessories" />
         <div className="border-t border-border" />
+
+        <div className="w-full h-screen bg-secondary"></div>
 
         {/* Bags Highlights */}
         <ProductRow title="Carry in Style" subtitle="Bags" category="bags" />
