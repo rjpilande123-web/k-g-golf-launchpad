@@ -18,8 +18,7 @@ const allCategories: Record<string, { name: string; image: string }> = {
   Bags: { name: "Bags", image: productBag },
 };
 
-export const apparelCategories = [allCategories.Men, allCategories.Women, allCategories.Kids];
-export const gearCategories = [allCategories.Accessories, allCategories.Bags];
+export const mainCategories = [allCategories.Men, allCategories.Accessories, allCategories.Bags];
 
 const CategoryGrid = ({ title, categories }: CategoryGridProps) => {
   return (

@@ -1,5 +1,5 @@
 import HeroSection from "@/components/HeroSection";
-import CategoryGrid, { apparelCategories, gearCategories } from "@/components/CategoryGrid";
+import CategoryGrid, { mainCategories } from "@/components/CategoryGrid";
 import { ProductRow } from "@/components/FeaturedProducts";
 import ServicesSection from "@/components/ServicesSection";
 import Footer from "@/components/Footer";
@@ -10,32 +10,16 @@ const Index = () => {
       <main>
         <HeroSection />
 
-        {/* Apparel Categories */}
-        <CategoryGrid title="Shop by Category" categories={apparelCategories} />
-        <div className="w-full h-screen bg-secondary"></div>
-        {/* Men Highlights */}
-        <ProductRow title="New This Season" subtitle="Men" category="men" />
-        <div className="border-t border-border" />
-
+        {/* Shop by Category */}
+        <CategoryGrid title="Shop by Category" categories={mainCategories} />
         <div className="w-full h-screen bg-secondary"></div>
 
-        {/* Women Highlights */}
-        <ProductRow title="Spring Essentials" subtitle="Women" category="women" />
-        <div className="border-t border-border" />
-
-        {/* Kids Highlights */}
-        <ProductRow title="Junior Collection" subtitle="Kids" category="kids" />
-        <div className="border-t border-border" />
-
-        {/* Gear Categories */}
-        <CategoryGrid title="Shop by Category" categories={gearCategories} />
-
+        {/* Apparel Highlights */}
+        <ProductRow title="New This Season" subtitle="Apparel" category="men" />
         <div className="w-full h-screen bg-secondary"></div>
 
         {/* Accessories Highlights */}
         <ProductRow title="Complete Your Look" subtitle="Accessories" category="accessories" />
-        <div className="border-t border-border" />
-
         <div className="w-full h-screen bg-secondary"></div>
 
         {/* Bags Highlights */}
