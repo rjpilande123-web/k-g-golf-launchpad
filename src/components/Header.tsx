@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Menu, Search, X, ChevronRight } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import productsData from "@/data/products.json";
-import logo from "@/assets/kng-logo.jpg";
+import logo from "@/assets/kng-logo.png";
 
 const menuItems = [
   { label: "Men", href: "/products?category=men" },
@@ -31,6 +33,25 @@ Object.entries(imageModules).forEach(([path, url]) => {
   imageMap[filename] = url;
 });
 
+const MenuList = ({ onClose }: { onClose: () => void }) => (
+  <nav className="flex-1 overflow-y-auto px-6 py-4">
+    <ul>
+      {menuItems.map((item) => (
+        <li key={item.label}>
+          <Link
+            to={item.href}
+            className="flex items-center justify-between py-4 text-sm font-body tracking-widest uppercase hover:text-muted-foreground transition-colors"
+            onClick={onClose}
+          >
+            {item.label}
+            <ChevronRight size={16} className="text-muted-foreground" />
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </nav>
+);
+
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -39,6 +60,7 @@ const Header = () => {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   const active = scrolled || hovered;
 
@@ -64,15 +86,15 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Prevent body scroll when menu is open
+  // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    if (menuOpen) {
+    if (menuOpen && isMobile) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
     return () => { document.body.style.overflow = ""; };
-  }, [menuOpen]);
+  }, [menuOpen, isMobile]);
 
   return (
     <>
@@ -85,15 +107,39 @@ const Header = () => {
       >
         <div className="flex items-center justify-between p-6">
           <div className="flex items-center">
-            <button
-              onClick={() => setMenuOpen(true)}
-              className={`flex items-center transition-colors ${
-                active ? "text-foreground" : "text-white"
-              }`}
-              aria-label="Open menu"
-            >
-              <Menu size={22} />
-            </button>
+            {/* Desktop: Sheet menu */}
+            {!isMobile ? (
+              <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+                <SheetTrigger asChild>
+                  <button
+                    className={`flex items-center transition-colors ${
+                      active ? "text-foreground" : "text-white"
+                    }`}
+                    aria-label="Open menu"
+                  >
+                    <Menu size={22} />
+                  </button>
+                </SheetTrigger>
+                <SheetContent side="left" className="w-[400px] p-0 pt-6 bg-background">
+                  <div className="px-6 pb-4">
+                    <Link to="/" onClick={() => setMenuOpen(false)}>
+                      <img src={logo} alt="K&G" className="h-10 object-contain" />
+                    </Link>
+                  </div>
+                  <MenuList onClose={() => setMenuOpen(false)} />
+                </SheetContent>
+              </Sheet>
+            ) : (
+              <button
+                onClick={() => setMenuOpen(true)}
+                className={`flex items-center transition-colors ${
+                  active ? "text-foreground" : "text-white"
+                }`}
+                aria-label="Open menu"
+              >
+                <Menu size={22} />
+              </button>
+            )}
           </div>
 
           <Link to="/" className="absolute left-1/2 -translate-x-1/2">
@@ -120,36 +166,27 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Full-screen Menu Overlay */}
-      {menuOpen && (
+      {/* Mobile Full-screen Menu Overlay */}
+      {isMobile && menuOpen && (
         <div className="fixed inset-0 z-[100] bg-background animate-fade-in flex flex-col">
           <div className="flex items-center justify-between p-6">
-            <Link to="/" onClick={() => setMenuOpen(false)}>
-              <img src={logo} alt="K&G" className="h-10 sm:h-12 object-contain" />
-            </Link>
             <button
               onClick={() => setMenuOpen(false)}
               aria-label="Close menu"
             >
               <X size={24} />
             </button>
+            <Link to="/" onClick={() => setMenuOpen(false)}>
+              <img src={logo} alt="K&G" className="h-10 object-contain" />
+            </Link>
+            <button
+              onClick={() => { setMenuOpen(false); setSearchOpen(true); }}
+              aria-label="Search"
+            >
+              <Search size={22} />
+            </button>
           </div>
-          <nav className="flex-1 overflow-y-auto px-6 py-4">
-            <ul>
-              {menuItems.map((item) => (
-                <li key={item.label}>
-                  <Link
-                    to={item.href}
-                    className="flex items-center justify-between py-4 text-sm font-body tracking-widest uppercase hover:text-muted-foreground transition-colors border-b border-border"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {item.label}
-                    <ChevronRight size={16} className="text-muted-foreground" />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <MenuList onClose={() => setMenuOpen(false)} />
         </div>
       )}
 
