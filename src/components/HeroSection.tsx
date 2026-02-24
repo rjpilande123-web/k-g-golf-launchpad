@@ -18,23 +18,9 @@ const HeroSection = () => {
         <p className="text-sm font-body tracking-[0.3em] uppercase text-primary-foreground/80 mb-3">
           Spring/Summer 2026
         </p>
-        <h2 className="font-heading text-3xl sm:text-5xl font-semibold text-primary-foreground mb-4">
+        <h2 className="font-heading text-3xl sm:text-5xl font-semibold text-primary-foreground">
           The Fairway Collection
         </h2>
-        <div className="flex items-center justify-center gap-6">
-          <a
-            href="#"
-            className="text-sm font-body tracking-widest uppercase text-primary-foreground underline underline-offset-4 hover:text-accent transition-colors"
-          >
-            Shop Now
-          </a>
-          <a
-            href="#"
-            className="text-sm font-body tracking-widest uppercase text-primary-foreground underline underline-offset-4 hover:text-accent transition-colors"
-          >
-            Discover More
-          </a>
-        </div>
       </div>
     </section>
   );
