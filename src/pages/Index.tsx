@@ -11,7 +11,7 @@ const Index = () => {
         <HeroSection />
 
         {/* Shop by Category */}
-        <CategoryGrid title="Shop by Category" categories={mainCategories} />
+        <CategoryGrid title="Explore Our Collections" categories={mainCategories} />
         <div className="w-full h-screen bg-secondary"></div>
 
         {/* Apparel Highlights */}

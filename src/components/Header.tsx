@@ -1,21 +1,21 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Menu, Search, X, ChevronDown, ChevronUp } from "lucide-react";
+import { Menu, Search, X, ChevronRight } from "lucide-react";
 import productsData from "@/data/products.json";
+import logo from "@/assets/kng-logo.jpg";
 
-const navItems = [
-  { label: "Home", href: "/" },
-  {
-    label: "Products",
-    href: "/products",
-    subcategories: [
-      { label: "Men", href: "/products?category=men" },
-      { label: "Women", href: "/products?category=women" },
-      { label: "Kids", href: "/products?category=kids" },
-      { label: "Accessories", href: "/products?category=accessories" },
-      { label: "Bags", href: "/products?category=bags" },
-    ],
-  },
+const menuItems = [
+  { label: "Men", href: "/products?category=men" },
+  { label: "Women", href: "/products?category=women" },
+  { label: "Kids", href: "/products?category=kids" },
+  { label: "Families", href: "/products?category=families" },
+  { label: "Bags and Pouches", href: "/products?category=bags" },
+  { label: "Golf Bags", href: "/products?category=golf-bags" },
+  { label: "Accessories", href: "/products?category=accessories" },
+  { label: "Gifts", href: "/products?category=gifts" },
+  { label: "Customized", href: "/products?category=customized" },
+  { label: "Casual", href: "/products?category=casual" },
+  { label: "Inner Wear", href: "/products?category=inner-wear" },
   { label: "About Us", href: "/about" },
   { label: "Contact Us", href: "/contact" },
 ];
@@ -33,7 +33,6 @@ Object.entries(imageModules).forEach(([path, url]) => {
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [productsOpen, setProductsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -60,12 +59,20 @@ const Header = () => {
     : [];
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [menuOpen]);
 
   return (
     <>
@@ -80,85 +87,65 @@ const Header = () => {
           <div className="flex items-center">
             <button
               onClick={() => setMenuOpen(true)}
-              className={`flex font-body items-center gap-2 text-foreground hover:text-muted-foreground transition-colors uppercase text-xs ${
-                active ? "" : "text-white"
+              className={`flex items-center transition-colors ${
+                active ? "text-foreground" : "text-white"
               }`}
               aria-label="Open menu"
             >
-              <Menu size={20} /> menu
+              <Menu size={22} />
             </button>
           </div>
 
-          <Link to="/" className={`font-body text-xl sm:text-2xl md:text-3xl font-bold tracking-wider uppercase ${active ? "" : "text-white"}`}>
-            K&G
+          <Link to="/" className="absolute left-1/2 -translate-x-1/2">
+            <img
+              src={logo}
+              alt="K&G"
+              className={`h-10 sm:h-12 object-contain transition-all duration-300 ${
+                active ? "" : "brightness-0 invert"
+              }`}
+            />
           </Link>
 
           <div className="flex items-center">
             <button
               onClick={() => setSearchOpen(true)}
-              className={`flex font-body items-center gap-2 text-foreground hover:text-muted-foreground transition-colors uppercase text-xs ${
-                active ? "" : "text-white"
+              className={`flex items-center transition-colors ${
+                active ? "text-foreground" : "text-white"
               }`}
+              aria-label="Search"
             >
-              <Search size={20} /> search
+              <Search size={22} />
             </button>
           </div>
         </div>
       </header>
 
+      {/* Full-screen Menu Overlay */}
       {menuOpen && (
-        <div className="fixed inset-0 z-[100]">
-          <div
-            className="absolute inset-0 bg-foreground/30 animate-fade-in"
-            onClick={() => { setMenuOpen(false); setProductsOpen(false); }}
-          />
-          <nav className="absolute top-0 left-0 h-full w-80 max-w-[85vw] bg-background shadow-2xl animate-slide-in flex flex-col">
-            <div className="flex items-center justify-between p-6 border-b border-border">
-              <span className="font-heading text-lg font-semibold tracking-wider uppercase">K&G</span>
-              <button
-                onClick={() => { setMenuOpen(false); setProductsOpen(false); }}
-                aria-label="Close menu"
-              >
-                <X size={22} />
-              </button>
-            </div>
-            <ul className="flex-1 overflow-y-auto py-4">
-              {navItems.map((item) => (
+        <div className="fixed inset-0 z-[100] bg-background animate-fade-in flex flex-col">
+          <div className="flex items-center justify-between p-6">
+            <Link to="/" onClick={() => setMenuOpen(false)}>
+              <img src={logo} alt="K&G" className="h-10 sm:h-12 object-contain" />
+            </Link>
+            <button
+              onClick={() => setMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              <X size={24} />
+            </button>
+          </div>
+          <nav className="flex-1 overflow-y-auto px-6 py-4">
+            <ul>
+              {menuItems.map((item) => (
                 <li key={item.label}>
-                  {item.subcategories ? (
-                    <>
-                      <button
-                        onClick={() => setProductsOpen(!productsOpen)}
-                        className="w-full flex items-center justify-between px-6 py-4 text-sm font-body tracking-widest uppercase hover:bg-secondary transition-colors"
-                      >
-                        {item.label}
-                        {productsOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                      </button>
-                      {productsOpen && (
-                        <ul className="bg-secondary/50">
-                          {item.subcategories.map((sub) => (
-                            <li key={sub.label}>
-                              <Link
-                                to={sub.href}
-                                className="block px-10 py-3 text-sm font-body tracking-wider hover:bg-secondary transition-colors"
-                                onClick={() => { setMenuOpen(false); setProductsOpen(false); }}
-                              >
-                                {sub.label}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </>
-                  ) : (
-                    <Link
-                      to={item.href}
-                      className="block px-6 py-4 text-sm font-body tracking-widest uppercase hover:bg-secondary transition-colors"
-                      onClick={() => { setMenuOpen(false); setProductsOpen(false); }}
-                    >
-                      {item.label}
-                    </Link>
-                  )}
+                  <Link
+                    to={item.href}
+                    className="flex items-center justify-between py-4 text-sm font-body tracking-widest uppercase hover:text-muted-foreground transition-colors border-b border-border"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {item.label}
+                    <ChevronRight size={16} className="text-muted-foreground" />
+                  </Link>
                 </li>
               ))}
             </ul>

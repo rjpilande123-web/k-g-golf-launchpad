@@ -11,14 +11,12 @@ interface CategoryGridProps {
 }
 
 const allCategories: Record<string, { name: string; image: string }> = {
-  Men: { name: "Men", image: productPolo },
-  Women: { name: "Women", image: heroWomen },
-  Kids: { name: "Kids", image: categoryKids },
+  Apparel: { name: "Apparel", image: productPolo },
   Accessories: { name: "Accessories", image: productAccessories },
   Bags: { name: "Bags", image: productBag },
 };
 
-export const mainCategories = [allCategories.Men, allCategories.Accessories, allCategories.Bags];
+export const mainCategories = [allCategories.Apparel, allCategories.Accessories, allCategories.Bags];
 
 const CategoryGrid = ({ title, categories }: CategoryGridProps) => {
   return (
