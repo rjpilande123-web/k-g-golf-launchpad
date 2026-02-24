@@ -96,11 +96,13 @@ const Header = () => {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen, isMobile]);
 
+  const headerActive = active || (isMobile && menuOpen);
+
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          active ? "bg-white shadow-md" : "bg-transparent"
+        className={`fixed top-0 left-0 w-full z-[95] transition-all duration-300 ${
+          headerActive ? "bg-white shadow-md" : "bg-transparent"
         }`}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -113,7 +115,7 @@ const Header = () => {
                 <SheetTrigger asChild>
                   <button
                     className={`flex items-center transition-colors ${
-                      active ? "text-foreground" : "text-white"
+                      headerActive ? "text-foreground" : "text-white"
                     }`}
                     aria-label="Open menu"
                   >
@@ -131,13 +133,13 @@ const Header = () => {
               </Sheet>
             ) : (
               <button
-                onClick={() => setMenuOpen(true)}
+                onClick={() => setMenuOpen(!menuOpen)}
                 className={`flex items-center transition-colors ${
-                  active ? "text-foreground" : "text-white"
+                  headerActive ? "text-foreground" : "text-white"
                 }`}
-                aria-label="Open menu"
+                aria-label={menuOpen ? "Close menu" : "Open menu"}
               >
-                <Menu size={22} />
+                {menuOpen ? <X size={22} /> : <Menu size={22} />}
               </button>
             )}
           </div>
@@ -147,7 +149,7 @@ const Header = () => {
               src={logo}
               alt="K&G"
               className={`h-10 sm:h-12 object-contain transition-all duration-300 ${
-                active ? "" : "brightness-0 invert"
+                headerActive ? "" : "brightness-0 invert"
               }`}
             />
           </Link>
@@ -156,7 +158,7 @@ const Header = () => {
             <button
               onClick={() => setSearchOpen(true)}
               className={`flex items-center transition-colors ${
-                active ? "text-foreground" : "text-white"
+                headerActive ? "text-foreground" : "text-white"
               }`}
               aria-label="Search"
             >
@@ -166,26 +168,9 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Mobile Full-screen Menu Overlay */}
+      {/* Mobile Full-screen Menu Overlay — renders below the fixed header */}
       {isMobile && menuOpen && (
-        <div className="fixed inset-0 z-[100] bg-background animate-fade-in flex flex-col">
-          <div className="flex items-center justify-between p-6">
-            <button
-              onClick={() => setMenuOpen(false)}
-              aria-label="Close menu"
-            >
-              <X size={24} />
-            </button>
-            <Link to="/" onClick={() => setMenuOpen(false)}>
-              <img src={logo} alt="K&G" className="h-10 object-contain" />
-            </Link>
-            <button
-              onClick={() => { setMenuOpen(false); setSearchOpen(true); }}
-              aria-label="Search"
-            >
-              <Search size={22} />
-            </button>
-          </div>
+        <div className="fixed inset-0 top-0 z-[90] bg-background pt-[72px] animate-fade-in flex flex-col overflow-y-auto">
           <MenuList onClose={() => setMenuOpen(false)} />
         </div>
       )}
