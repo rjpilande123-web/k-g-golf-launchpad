@@ -148,9 +148,7 @@ const Header = () => {
             <img
               src={logo}
               alt="K&G"
-              className={`h-10 sm:h-12 object-contain transition-all duration-300 ${
-                headerActive ? "" : "brightness-0 invert"
-              }`}
+              className="h-10 sm:h-12 object-contain"
             />
           </Link>
 
