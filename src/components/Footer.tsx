@@ -1,39 +1,41 @@
+import { Link } from "react-router-dom";
 import footerLogo from "@/assets/footer-logo.jpg";
 
 const Footer = () => {
   return (
     <footer className="border-t border-border">
       <div className="max-w-[1400px] mx-auto px-6 py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-        {/* Help */}
+        {/* Shop */}
         <div>
-          <h3 className="text-xs font-body tracking-[0.2em] uppercase mb-6 font-bold">Help</h3>
+          <h3 className="text-xs font-body tracking-[0.2em] uppercase mb-6 font-bold">Shop</h3>
           <ul className="space-y-3 text-sm font-body text-muted-foreground">
-            <li><a href="#" className="hover:text-foreground transition-colors">Customer Service</a></li>
-            <li><a href="#" className="hover:text-foreground transition-colors">FAQs</a></li>
-            <li><a href="#" className="hover:text-foreground transition-colors">Size Guide</a></li>
-            <li><a href="#" className="hover:text-foreground transition-colors">Stores</a></li>
+            <li><Link to="/products?category=men" className="hover:text-foreground transition-colors">Men</Link></li>
+            <li><Link to="/products?category=women" className="hover:text-foreground transition-colors">Women</Link></li>
+            <li><Link to="/products?category=kids" className="hover:text-foreground transition-colors">Kids</Link></li>
+            <li><Link to="/products?category=accessories" className="hover:text-foreground transition-colors">Accessories</Link></li>
+            <li><Link to="/products?category=bags" className="hover:text-foreground transition-colors">Bags & Pouches</Link></li>
+            <li><Link to="/products?category=golf-bags" className="hover:text-foreground transition-colors">Golf Bags</Link></li>
           </ul>
         </div>
 
-        {/* Services */}
+        {/* Company */}
         <div>
-          <h3 className="text-xs font-body tracking-[0.2em] uppercase mb-6 font-bold">Services</h3>
+          <h3 className="text-xs font-body tracking-[0.2em] uppercase mb-6 font-bold">Company</h3>
           <ul className="space-y-3 text-sm font-body text-muted-foreground">
-            <li><a href="#" className="hover:text-foreground transition-colors">Custom Fitting</a></li>
-            <li><a href="#" className="hover:text-foreground transition-colors">Personalization</a></li>
-            <li><a href="#" className="hover:text-foreground transition-colors">Gift Cards</a></li>
-            <li><a href="#" className="hover:text-foreground transition-colors">Returns</a></li>
+            <li><Link to="/about" className="hover:text-foreground transition-colors">About Us</Link></li>
+            <li><Link to="/contact" className="hover:text-foreground transition-colors">Contact Us</Link></li>
+            <li><Link to="/faqs" className="hover:text-foreground transition-colors">FAQs</Link></li>
+            <li><Link to="/terms" className="hover:text-foreground transition-colors">Terms & Conditions</Link></li>
           </ul>
         </div>
 
-        {/* About */}
+        {/* Follow Us */}
         <div>
-          <h3 className="text-xs font-body tracking-[0.2em] uppercase mb-6 font-bold">About K&G</h3>
+          <h3 className="text-xs font-body tracking-[0.2em] uppercase mb-6 font-bold">Follow Us</h3>
           <ul className="space-y-3 text-sm font-body text-muted-foreground">
-            <li><a href="#" className="hover:text-foreground transition-colors">Our Story</a></li>
-            <li><a href="#" className="hover:text-foreground transition-colors">Sustainability</a></li>
-            <li><a href="#" className="hover:text-foreground transition-colors">Careers</a></li>
-            <li><a href="#" className="hover:text-foreground transition-colors">Press</a></li>
+            <li><a href="https://www.facebook.com/GolfKNG" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Facebook</a></li>
+            <li><a href="https://www.instagram.com/golfkng/?hl=en" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Instagram</a></li>
+            <li><a href="https://x.com/GolfKNG" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">X (Twitter)</a></li>
           </ul>
         </div>
 
@@ -51,9 +53,9 @@ const Footer = () => {
 
       <div className="border-t border-border px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-6 text-xs font-body text-muted-foreground">
-          <a href="#" className="hover:text-foreground transition-colors">Privacy Policy</a>
-          <a href="#" className="hover:text-foreground transition-colors">Terms</a>
-          <a href="#" className="hover:text-foreground transition-colors">Accessibility</a>
+          <Link to="/terms" className="hover:text-foreground transition-colors">Terms & Conditions</Link>
+          <Link to="/faqs" className="hover:text-foreground transition-colors">FAQs</Link>
+          <Link to="/contact" className="hover:text-foreground transition-colors">Contact</Link>
         </div>
         <img src={footerLogo} alt="K&G - Keep On Going" className="h-10 object-contain" />
       </div>
