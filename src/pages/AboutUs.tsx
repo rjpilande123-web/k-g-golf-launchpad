@@ -6,12 +6,11 @@ const AboutUs = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-24">
-        {/* Hero */}
         <section className="px-6 py-20 max-w-[900px] mx-auto text-center">
           <p className="text-xs font-body tracking-[0.3em] uppercase text-muted-foreground mb-4">Our Story</p>
-          <h1 className="font-heading text-4xl sm:text-5xl mb-8">About K&G</h1>
+          <h1 className="font-heading text-4xl sm:text-5xl mb-8">About Us</h1>
           <p className="font-body text-base leading-relaxed text-muted-foreground">
-            Born from a passion for the game and a love of refined style, K&G was founded to bring premium golfing apparel to players who demand both performance and elegance. Every piece in our collection is thoughtfully designed to move with you — on the course and beyond.
+            K&G Golf Fashion Co., Ltd. is a diverse high-class fashion sports apparel for golf that was established in the year 2016. As one of the Top 3 leading high-class fashion sports apparel and accessories for golf, K&G has been satisfying golf enthusiasts with comfort and fashion through its diverse golf products not just in the Philippines but also abroad. As we strive to be trusted golf wear, K&G Golf aims to continue to be the leading choice for golf apparel worldwide, recognized for our commitment to quality, style, and performance.
           </p>
         </section>
 
@@ -47,7 +46,7 @@ const AboutUs = () => {
 
         <div className="border-t border-border" />
 
-        {/* Team / Numbers */}
+        {/* Numbers */}
         <section className="px-6 py-20 max-w-[1200px] mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
