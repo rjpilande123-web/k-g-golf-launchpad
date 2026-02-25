@@ -39,24 +39,20 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Newsletter */}
+        {/* Contact */}
         <div>
-          <h3 className="text-xs font-body tracking-[0.2em] uppercase mb-6 font-bold">Stay Connected</h3>
-          <p className="text-sm font-body text-muted-foreground mb-4">
-            Subscribe for exclusive updates, new arrivals, and member-only offers.
-          </p>
-          <a href="#" className="text-sm font-body underline underline-offset-4 hover:text-muted-foreground transition-colors">
-            Subscribe
-          </a>
+          <h3 className="text-xs font-body tracking-[0.2em] uppercase mb-6 font-bold">Contact</h3>
+          <div className="space-y-3 text-sm font-body text-muted-foreground">
+            <p>Room 1605, Ho King Commercial Centre, 2-16 Fa Yuen Street, Mongkok, Kowloon, Hong Kong</p>
+            <p><a href="mailto:inquiries@keepgoinggolf.com" className="hover:text-foreground transition-colors">inquiries@keepgoinggolf.com</a></p>
+            <p><a href="tel:+85261588111" className="hover:text-foreground transition-colors">00852-61588111</a></p>
+            <p><a href="tel:+85269917688" className="hover:text-foreground transition-colors">00852-69917688</a></p>
+          </div>
         </div>
       </div>
 
       <div className="border-t border-border px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-6 text-xs font-body text-muted-foreground">
-          <Link to="/terms" className="hover:text-foreground transition-colors">Terms & Conditions</Link>
-          <Link to="/faqs" className="hover:text-foreground transition-colors">FAQs</Link>
-          <Link to="/contact" className="hover:text-foreground transition-colors">Contact</Link>
-        </div>
+        <p className="text-xs font-body text-muted-foreground">© {new Date().getFullYear()} K&G Golf Fashion Co., Ltd. All rights reserved.</p>
         <img src={footerLogo} alt="K&G - Keep On Going" className="h-10 object-contain" />
       </div>
     </footer>
