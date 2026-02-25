@@ -1,3 +1,5 @@
+import footerLogo from "@/assets/footer-logo.jpg";
+
 const Footer = () => {
   return (
     <footer className="border-t border-border">
@@ -53,7 +55,7 @@ const Footer = () => {
           <a href="#" className="hover:text-foreground transition-colors">Terms</a>
           <a href="#" className="hover:text-foreground transition-colors">Accessibility</a>
         </div>
-        <p className="font-heading text-lg font-bold tracking-wider uppercase">K&G</p>
+        <img src={footerLogo} alt="K&G - Keep On Going" className="h-10 object-contain" />
       </div>
     </footer>
   );

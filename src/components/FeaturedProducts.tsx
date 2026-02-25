@@ -1,4 +1,3 @@
-import { Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import productsData from "@/data/products.json";
 
@@ -64,12 +63,6 @@ export const ProductRow = ({ title, subtitle, category, count = 4 }: ProductRowP
               <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs font-body p-4 text-center">
                 {product.name}
               </div>
-              <button
-                className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Add to wishlist"
-              >
-                <Heart size={18} />
-              </button>
               {product.hexcode.length > 0 && (
                 <div className="absolute bottom-3 left-3 flex gap-1">
                   {product.hexcode.slice(0, 4).map((hex, i) => (
