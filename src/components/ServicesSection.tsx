@@ -1,11 +1,9 @@
 import productBag from "@/assets/product-bag.jpg";
 import productShoes from "@/assets/product-shoes.jpg";
-import categoryKids from "@/assets/category-kids.jpg";
 
 const services = [
-  { title: "Custom Fitting", description: "Personalized sizing for the perfect fit on the course.", image: productBag },
+  { title: "Custom Products", description: "Personalized golf apparel and accessories tailored to your specifications.", image: productBag },
   { title: "Gift Wrapping", description: "Signature gift packaging for every occasion.", image: productShoes },
-  { title: "Junior Program", description: "Introducing the next generation to premium golf style.", image: categoryKids },
 ];
 
 const ServicesSection = () => {
@@ -17,7 +15,7 @@ const ServicesSection = () => {
       <p className="text-center text-sm font-body text-muted-foreground mb-12 max-w-lg mx-auto">
         Expert advice, custom fitting, and exclusive personalization options.
       </p>
-      <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
         {services.map((s) => (
           <a key={s.title} href="#" className="group block">
             <div className="aspect-[4/5] overflow-hidden">
