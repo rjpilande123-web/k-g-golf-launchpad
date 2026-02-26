@@ -81,12 +81,12 @@ export const ProductRow = ({ title, subtitle, category, count = 4 }: ProductRowP
         ))}
       </div>
       <div className="text-center mt-8">
-        <a
-          href="#"
+        <Link
+          to={`/products?category=${category}`}
           className="inline-block border border-foreground px-8 py-3 text-sm font-body tracking-widest uppercase hover:bg-foreground hover:text-background transition-colors"
         >
-          Shop Now
-        </a>
+          See More
+        </Link>
       </div>
     </section>
   );
