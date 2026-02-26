@@ -104,7 +104,6 @@ const Products = () => {
                   <p className="mt-3 text-xs font-body tracking-widest uppercase text-muted-foreground">NEW</p>
                 )}
                 <p className="mt-1 text-sm font-body">{product.name}</p>
-                <p className="text-sm font-body text-muted-foreground">₱{product.price}</p>
               </Link>
             ))}
           </div>

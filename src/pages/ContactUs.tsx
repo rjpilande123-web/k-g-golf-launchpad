@@ -1,4 +1,4 @@
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -7,56 +7,65 @@ const ContactUs = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-24">
-        <section className="px-6 py-16 max-w-[1200px] mx-auto">
-          <p className="text-xs font-body tracking-[0.3em] uppercase text-muted-foreground mb-2 text-center">Get in Touch</p>
-          <h1 className="font-heading text-4xl sm:text-5xl text-center mb-4">Contact Us</h1>
-          <p className="font-body text-base text-muted-foreground text-center max-w-[700px] mx-auto mb-16">
-            Thank you for visiting our website! If you have any questions or inquiries, feel free to reach out to us using the contact information below.
-          </p>
+        {/* Hero */}
+        <section className="relative bg-foreground text-background px-6 py-24">
+          <div className="max-w-[900px] mx-auto text-center">
+            <p className="text-xs font-body tracking-[0.3em] uppercase opacity-60 mb-4">Get in Touch</p>
+            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl mb-6">Contact Us</h1>
+            <p className="font-body text-base leading-relaxed opacity-70 max-w-[600px] mx-auto">
+              Thank you for visiting our website! If you have any questions or inquiries, feel free to reach out to us using the contact information below.
+            </p>
+          </div>
+        </section>
 
-          <div className="grid md:grid-cols-3 gap-6 mb-16">
+        {/* Contact Cards */}
+        <section className="px-6 py-20 max-w-[1200px] mx-auto">
+          <div className="grid md:grid-cols-3 gap-8">
             {/* Address */}
-            <div className="border border-border p-8">
-              <h2 className="font-heading text-lg mb-4 uppercase tracking-wider">Our Office</h2>
-              <p className="font-body text-sm text-muted-foreground mb-6">
-                Room 1605, Ho King Commercial Centre, 2-16 Fa Yuen Street, Mongkok, Kowloon, Hong Kong
-              </p>
-              <div className="flex items-center justify-center gap-2 border border-foreground px-6 py-3 text-sm font-body tracking-widest uppercase">
-                <MapPin size={16} />
-                Hong Kong
+            <div className="bg-secondary/30 p-10 text-center group hover:bg-secondary/50 transition-colors">
+              <div className="w-14 h-14 mx-auto mb-6 border border-foreground/20 flex items-center justify-center">
+                <MapPin size={22} className="text-foreground/70" />
               </div>
+              <h2 className="font-heading text-base uppercase tracking-wider mb-4">Our Office</h2>
+              <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                Room 1605, Ho King Commercial Centre,<br />
+                2-16 Fa Yuen Street, Mongkok,<br />
+                Kowloon, Hong Kong
+              </p>
             </div>
 
             {/* Email */}
-            <div className="border border-border p-8">
-              <h2 className="font-heading text-lg mb-4 uppercase tracking-wider">Email Us</h2>
-              <p className="font-body text-sm text-muted-foreground mb-6">
-                Send us an email and we'll get back to you as soon as possible.
+            <div className="bg-secondary/30 p-10 text-center group hover:bg-secondary/50 transition-colors">
+              <div className="w-14 h-14 mx-auto mb-6 border border-foreground/20 flex items-center justify-center">
+                <Mail size={22} className="text-foreground/70" />
+              </div>
+              <h2 className="font-heading text-base uppercase tracking-wider mb-4">Email Us</h2>
+              <p className="font-body text-sm text-muted-foreground leading-relaxed">
+                inquiries@keepgoinggolf.com
               </p>
-              <a
-                href="mailto:inquiries@keepgoinggolf.com"
-                className="flex items-center justify-center gap-2 border border-foreground px-6 py-3 text-sm font-body tracking-widest uppercase hover:bg-foreground hover:text-background transition-colors"
-              >
-                <Mail size={16} />
-                Email Us
-              </a>
             </div>
 
             {/* Phone */}
-            <div className="border border-border p-8">
-              <h2 className="font-heading text-lg mb-4 uppercase tracking-wider">Call Us</h2>
-              <div className="font-body text-sm text-muted-foreground mb-6 space-y-1">
+            <div className="bg-secondary/30 p-10 text-center group hover:bg-secondary/50 transition-colors">
+              <div className="w-14 h-14 mx-auto mb-6 border border-foreground/20 flex items-center justify-center">
+                <Phone size={22} className="text-foreground/70" />
+              </div>
+              <h2 className="font-heading text-base uppercase tracking-wider mb-4">Call Us</h2>
+              <div className="font-body text-sm text-muted-foreground leading-relaxed space-y-1">
                 <p>00852-61588111</p>
                 <p>00852-69917688</p>
               </div>
-              <a
-                href="tel:+85261588111"
-                className="flex items-center justify-center gap-2 border border-foreground px-6 py-3 text-sm font-body tracking-widest uppercase hover:bg-foreground hover:text-background transition-colors"
-              >
-                <Phone size={16} />
-                Call Now
-              </a>
             </div>
+          </div>
+        </section>
+
+        {/* Business Hours */}
+        <section className="px-6 pb-20">
+          <div className="max-w-[800px] mx-auto border-t border-b border-border py-12 flex flex-col md:flex-row items-center justify-center gap-4 text-center">
+            <Clock size={18} className="text-muted-foreground" />
+            <p className="font-body text-sm text-muted-foreground tracking-wide">
+              Monday – Friday &nbsp;|&nbsp; 9:00 AM – 6:00 PM (HKT)
+            </p>
           </div>
         </section>
       </main>
