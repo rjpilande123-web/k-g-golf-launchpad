@@ -76,7 +76,6 @@ export const ProductRow = ({ title, subtitle, category, count = 4 }: ProductRowP
               )}
             </div>
             <p className="mt-3 text-sm font-body">{product.name}</p>
-            <p className="text-sm font-body text-muted-foreground">₱{product.price}</p>
           </Link>
         ))}
       </div>

@@ -107,8 +107,7 @@ const ProductDetail = () => {
             {product.status === "Trends" && (
               <p className="font-body text-xs tracking-widest uppercase text-muted-foreground mb-1">NEW</p>
             )}
-            <h1 className="font-heading text-2xl sm:text-3xl mb-2">{product.name}</h1>
-            <p className="font-body text-lg mb-6">₱{product.price}</p>
+            <h1 className="font-heading text-2xl sm:text-3xl mb-6">{product.name}</h1>
 
             {/* Colors */}
             {product.hexcode.length > 1 && (

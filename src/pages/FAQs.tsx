@@ -1,5 +1,11 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const faqs = [
   {
@@ -41,22 +47,48 @@ const FAQs = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-24">
-        <section className="px-6 py-20 max-w-[900px] mx-auto">
-          <p className="text-xs font-body tracking-[0.3em] uppercase text-muted-foreground mb-4 text-center">
-            Help Center
-          </p>
-          <h1 className="font-heading text-4xl sm:text-5xl text-center mb-16">
-            Frequently Asked Questions
-          </h1>
-          <div className="space-y-8">
-            {faqs.map((faq) => (
-              <div key={faq.q} className="border-b border-border pb-8">
-                <h3 className="font-heading text-base mb-3">{faq.q}</h3>
-                <p className="font-body text-sm leading-relaxed text-muted-foreground">
+        {/* Hero */}
+        <section className="relative bg-foreground text-background px-6 py-24">
+          <div className="max-w-[900px] mx-auto text-center">
+            <p className="text-xs font-body tracking-[0.3em] uppercase opacity-60 mb-4">Help Center</p>
+            <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl mb-6">
+              Frequently Asked Questions
+            </h1>
+            <p className="font-body text-base leading-relaxed opacity-70 max-w-[600px] mx-auto">
+              Find answers to common questions about our products, services, and policies.
+            </p>
+          </div>
+        </section>
+
+        {/* FAQ Accordion */}
+        <section className="px-6 py-20 max-w-[800px] mx-auto">
+          <Accordion type="single" collapsible className="w-full">
+            {faqs.map((faq, index) => (
+              <AccordionItem key={index} value={`item-${index}`} className="border-border">
+                <AccordionTrigger className="font-heading text-sm sm:text-base text-left hover:no-underline py-6">
+                  {faq.q}
+                </AccordionTrigger>
+                <AccordionContent className="font-body text-sm leading-relaxed text-muted-foreground pb-6">
                   {faq.a}
-                </p>
-              </div>
+                </AccordionContent>
+              </AccordionItem>
             ))}
+          </Accordion>
+        </section>
+
+        {/* CTA */}
+        <section className="px-6 pb-20">
+          <div className="max-w-[800px] mx-auto bg-secondary/30 p-10 sm:p-14 text-center">
+            <h2 className="font-heading text-2xl mb-4">Still have questions?</h2>
+            <p className="font-body text-sm text-muted-foreground mb-6">
+              Can't find the answer you're looking for? Please reach out to our team.
+            </p>
+            <a
+              href="/contact"
+              className="inline-block border border-foreground px-8 py-3 text-sm font-body tracking-widest uppercase hover:bg-foreground hover:text-background transition-colors"
+            >
+              Contact Us
+            </a>
           </div>
         </section>
       </main>
