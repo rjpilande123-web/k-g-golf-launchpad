@@ -4,17 +4,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import productsData from "@/data/products.json";
-
-const imageModules = import.meta.glob(
-  "@/assets/images/products/*",
-  { eager: true, import: "default" }
-) as Record<string, string>;
-
-const imageMap: Record<string, string> = {};
-Object.entries(imageModules).forEach(([path, url]) => {
-  const filename = path.split("/").pop() as string;
-  imageMap[filename] = url;
-});
+import imageMap from "@/lib/productImages";
 
 interface Product {
   id: string;
@@ -80,6 +70,7 @@ const Products = () => {
                     alt={product.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     loading="lazy"
+                    decoding="async"
                   />
                   <button
                     className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors"

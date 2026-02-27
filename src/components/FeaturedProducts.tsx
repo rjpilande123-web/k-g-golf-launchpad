@@ -1,17 +1,6 @@
 import { Link } from "react-router-dom";
 import productsData from "@/data/products.json";
-
-const imageModules = import.meta.glob(
-  "@/assets/images/products/*",
-  { eager: true, import: "default" }
-) as Record<string, string>;
-
-const imageMap: Record<string, string> = {};
-
-Object.entries(imageModules).forEach(([path, url]) => {
-  const filename = path.split("/").pop() as string;
-  imageMap[filename] = url;
-});
+import imageMap from "@/lib/productImages";
 
 interface Product {
   id: string;
@@ -59,6 +48,7 @@ export const ProductRow = ({ title, subtitle, category, count = 4 }: ProductRowP
               alt={product.name}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               loading="lazy"
+              decoding="async"
             />
               <div className="w-full h-full flex items-center justify-center text-muted-foreground text-xs font-body p-4 text-center">
                 {product.name}

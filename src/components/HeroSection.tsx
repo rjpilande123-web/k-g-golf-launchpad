@@ -11,6 +11,7 @@ const HeroSection = () => {
           muted
           loop
           playsInline
+          preload="metadata"
           src={video}
         />
       <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent" />
