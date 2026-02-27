@@ -64,7 +64,7 @@ export const ProductRow = ({ title, subtitle, category, count = 4 }: ProductRowP
                 {product.name}
               </div>
               {product.hexcode.length > 0 && (
-                <div className="absolute bottom-3 left-3 flex gap-1">
+                <div className="flex gap-1 p-2">
                   {product.hexcode.slice(0, 4).map((hex, i) => (
                     <span
                       key={i}

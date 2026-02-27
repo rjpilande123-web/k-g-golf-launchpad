@@ -24,7 +24,7 @@ const CategoryGrid = ({ title, categories }: CategoryGridProps) => {
       <h2 className="font-heading text-3xl text-center mb-12">
         {title}
       </h2>
-      <div className={`max-w-[1400px] mx-auto grid ${categories.length > 2 ? "grid-cols-3" : "grid-cols-2"} gap-4`}>
+      <div className={`max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-4`}>
         {categories.map((cat) => (
           <Link key={cat.name} to={`/products?category=${cat.name.toLowerCase()}`} className="group block">
             <div className="aspect-square overflow-hidden bg-secondary">
