@@ -4,20 +4,7 @@ import footerLogo from "@/assets/footer-logo.jpg";
 const Footer = () => {
   return (
     <footer className="border-t border-border">
-      <div className="max-w-[1400px] mx-auto px-6 py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-        {/* Shop */}
-        <div>
-          <h3 className="text-xs font-body tracking-[0.2em] uppercase mb-6 font-bold">Shop</h3>
-          <ul className="space-y-3 text-sm font-body text-muted-foreground">
-            <li><Link to="/products?category=men" className="hover:text-foreground transition-colors">Men</Link></li>
-            <li><Link to="/products?category=women" className="hover:text-foreground transition-colors">Women</Link></li>
-            <li><Link to="/products?category=kids" className="hover:text-foreground transition-colors">Kids</Link></li>
-            <li><Link to="/products?category=accessories" className="hover:text-foreground transition-colors">Accessories</Link></li>
-            <li><Link to="/products?category=bags" className="hover:text-foreground transition-colors">Bags & Pouches</Link></li>
-            <li><Link to="/products?category=golf-bags" className="hover:text-foreground transition-colors">Golf Bags</Link></li>
-          </ul>
-        </div>
-
+      <div className="max-w-[1400px] mx-auto px-6 py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
         {/* Company */}
         <div>
           <h3 className="text-xs font-body tracking-[0.2em] uppercase mb-6 font-bold">Company</h3>
@@ -53,7 +40,7 @@ const Footer = () => {
 
       <div className="border-t border-border px-6 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p className="text-xs font-body text-muted-foreground">© {new Date().getFullYear()} K&G Golf Fashion Co., Ltd. All rights reserved.</p>
-        <img src={footerLogo} alt="K&G - Keep On Going" className="h-10 object-contain" />
+        <img src={footerLogo} alt="K&G - Keep On Going" className="h-6 object-contain" />
       </div>
     </footer>
   );

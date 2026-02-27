@@ -127,7 +127,7 @@ const Header = () => {
                 <SheetContent side="left" className="w-[400px] p-0 pt-6 bg-background">
                   <div className="px-6 pb-4">
                     <Link to="/" onClick={() => setMenuOpen(false)}>
-                      <img src={logo} alt="K&G" className="h-10 object-contain" />
+                      <img src={logo} alt="K&G" className="h-7 object-contain" />
                     </Link>
                   </div>
                   <MenuList onClose={() => setMenuOpen(false)} />
@@ -150,7 +150,7 @@ const Header = () => {
             <img
               src={logo}
               alt="K&G"
-              className="h-10 sm:h-12 object-contain"
+              className="h-7 sm:h-8 object-contain"
             />
           </Link>
 
