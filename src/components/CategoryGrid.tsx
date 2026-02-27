@@ -33,6 +33,7 @@ const CategoryGrid = ({ title, categories }: CategoryGridProps) => {
                 alt={cat.name}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
+                decoding="async"
               />
             </div>
             <p className="mt-3 text-center text-sm font-body tracking-widest uppercase">
