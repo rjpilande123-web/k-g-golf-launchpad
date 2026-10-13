@@ -55,6 +55,10 @@ const Header = () => {
   const location = useLocation();
   const isMobile = useIsMobile();
 
+  // Detect whether the current page is the index page.
+  const isHomePage = location.pathname === "/";
+
+  // Change the search input focus when the search overlay opens.
   useEffect(() => {
     if (searchOpen) {
       setTimeout(() => inputRef.current?.focus(), 100);
@@ -63,6 +67,7 @@ const Header = () => {
     }
   }, [searchOpen]);
 
+  // Search products by name, category, or subcategory.
   const searchResults =
     query.trim().length > 1
       ? (productsData as any[])
@@ -94,18 +99,28 @@ const Header = () => {
     setSearchOpen(false);
   }, [location.pathname]);
 
+  // Use white text on the index page and dark text on other pages.
+  const headerTextColor = isHomePage ? "text-white" : "text-gray-900";
+
   return (
     <>
-      {/* Always-transparent header */}
-      <header className="absolute top-0 left-0 w-full z-[95] bg-gradient-to-b from-black via-black/70 to-transparent">
+      {/* Header: gradient on index page, white on all other pages */}
+      <header
+        className={`absolute top-0 left-0 w-full z-[95] transition-colors duration-200 ${
+          isHomePage
+            ? "bg-gradient-to-b from-black via-black/70 to-transparent"
+            : "bg-white shadow-sm"
+        }`}
+      >
         <div className="flex items-center justify-between p-6">
+          {/* Menu button */}
           <div className="flex items-center">
-            {/* Desktop menu */}
             {!isMobile ? (
               <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
                 <SheetTrigger asChild>
                   <button
-                    className="flex items-center text-white transition-colors"
+                    type="button"
+                    className={`flex items-center transition-colors ${headerTextColor}`}
                     aria-label="Open menu"
                   >
                     <Menu size={22} />
@@ -126,16 +141,16 @@ const Header = () => {
                     </Link>
                   </div>
 
-                  <div className="w-full border-b"></div>
+                  <div className="w-full border-b" />
 
                   <MenuList onClose={() => setMenuOpen(false)} />
                 </SheetContent>
               </Sheet>
             ) : (
-              /* Mobile menu */
               <button
+                type="button"
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="flex items-center text-white transition-colors"
+                className={`flex items-center transition-colors ${headerTextColor}`}
                 aria-label={menuOpen ? "Close menu" : "Open menu"}
               >
                 {menuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -154,7 +169,9 @@ const Header = () => {
               className="h-10 sm:h-12 object-contain"
             />
 
-            <span className="hidden md:block text-5xl text-white">
+            <span
+              className={`hidden md:block text-5xl ${headerTextColor}`}
+            >
               KEEP ON GOING
             </span>
           </Link>
@@ -162,8 +179,9 @@ const Header = () => {
           {/* Search button */}
           <div className="flex items-center">
             <button
+              type="button"
               onClick={() => setSearchOpen(true)}
-              className="flex items-center text-white transition-colors"
+              className={`flex items-center transition-colors ${headerTextColor}`}
               aria-label="Search"
             >
               <Search size={22} />
@@ -172,8 +190,6 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Mobile full-screen menu overlay */}
-      
       {/* Mobile full-screen menu overlay */}
       {isMobile && menuOpen && (
         <div className="fixed inset-0 z-[110] bg-background animate-fade-in flex flex-col overflow-y-auto">
@@ -201,7 +217,6 @@ const Header = () => {
           <MenuList onClose={() => setMenuOpen(false)} />
         </div>
       )}
-
 
       {/* Search overlay */}
       {searchOpen && (
@@ -234,6 +249,7 @@ const Header = () => {
                 />
 
                 <button
+                  type="button"
                   onClick={() => setSearchOpen(false)}
                   aria-label="Close search"
                 >
