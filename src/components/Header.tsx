@@ -179,7 +179,7 @@ const Header = () => {
                       <img
                         src={logoDark}
                         alt="K&G"
-                        className="h-10 object-contain"
+                        className="h-10 w-auto object-cover"
                       />
                     </Link>
                   </div>
@@ -235,7 +235,7 @@ const Header = () => {
               <img
                 src={logoDark}
                 alt="K&G"
-                className="h-10 w-auto object-contain"
+                className="h-20 w-auto object-contain"
               />
             </Link>
 
