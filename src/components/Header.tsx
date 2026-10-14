@@ -4,16 +4,26 @@ import { Menu, Search, X, ChevronRight } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import productsData from "@/data/products.json";
-import logo from "@/assets/kng-logo.png";
+import logo from "@/assets/logo/kng.svg";
+import logoDark from "@/assets/logo/kng-dark.svg";
+
 
 const menuItems = [
-  { label: "Order Now", href: "/products" },
-  { label: "Personalization", href: "/contact" },
-  { label: "Events", href: "/contact" },
-  { label: "Collections", href: "/products" },
+  { label: "Men", href: "/products?category=men" },
+  { label: "Women", href: "/products?category=women" },
+  { label: "Kids", href: "/products?category=kids" },
+  { label: "Families", href: "/products?category=families" },
+  { label: "Bags and Pouches", href: "/products?category=bags" },
+  { label: "Golf Bags", href: "/products?category=golf-bags" },
+  { label: "Accessories", href: "/products?category=accessories" },
+  { label: "Gifts", href: "/products?category=gifts" },
+  { label: "Customized", href: "/products?category=customized" },
+  { label: "Casual", href: "/products?category=casual" },
+  { label: "Innerwear", href: "/products?category=innerwear" },
   { label: "About Us", href: "/about" },
   { label: "Contact Us", href: "/contact" },
 ];
+
 
 const imageModules = import.meta.glob(
   "@/assets/images/products/*",
@@ -50,18 +60,45 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const location = useLocation();
   const isMobile = useIsMobile();
 
-  // Detect whether the current page is the index page.
   const isHomePage = location.pathname === "/";
+  const useTransparentHeader = isHomePage && !isScrolled;
 
-  // Change the search input focus when the search overlay opens.
+  // Select the logo based on the header background.
+  const activeLogo = useTransparentHeader ? logo : logoDark;
+
+  const headerTextColor = useTransparentHeader
+    ? "text-white"
+    : "text-gray-900";
+
+  // Change the header appearance based on the scroll position.
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Focus the search input when the search overlay opens.
   useEffect(() => {
     if (searchOpen) {
-      setTimeout(() => inputRef.current?.focus(), 100);
+      const timeoutId = window.setTimeout(() => {
+        inputRef.current?.focus();
+      }, 100);
+
+      return () => window.clearTimeout(timeoutId);
     } else {
       setQuery("");
     }
@@ -99,21 +136,27 @@ const Header = () => {
     setSearchOpen(false);
   }, [location.pathname]);
 
-  // Use white text on the index page and dark text on other pages.
-  const headerTextColor = isHomePage ? "text-white" : "text-gray-900";
+  // Keep the scroll state accurate when changing routes.
+  useEffect(() => {
+    if (!isHomePage) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(window.scrollY > 20);
+    }
+  }, [isHomePage, location.pathname]);
 
   return (
     <>
-      {/* Header: gradient on index page, white on all other pages */}
+      {/* Transparent header at homepage top; white header otherwise */}
       <header
-        className={`absolute top-0 left-0 w-full z-[95] transition-colors duration-200 ${
-          isHomePage
-            ? "bg-gradient-to-b from-black via-black/70 to-transparent"
-            : "bg-white shadow-sm"
+        className={`left-0 top-0 w-full z-[95] transition-colors duration-200 py-2 ${
+          useTransparentHeader
+            ? "absolute bg-[linear-gradient(to_bottom,rgba(0,0,0,0.80)_0%,rgba(0,0,0,0.55)_25%,rgba(0,0,0,0.25)_60%,rgba(0,0,0,0.08)_82%,transparent_100%)]"
+            : "fixed bg-white shadow-sm"
         }`}
       >
         <div className="flex items-center justify-between p-6">
-          {/* Menu button */}
+          {/* Desktop and mobile menu */}
           <div className="flex items-center">
             {!isMobile ? (
               <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
@@ -134,7 +177,7 @@ const Header = () => {
                   <div className="px-6 pb-4">
                     <Link to="/" onClick={() => setMenuOpen(false)}>
                       <img
-                        src={logo}
+                        src={logoDark}
                         alt="K&G"
                         className="h-10 object-contain"
                       />
@@ -164,16 +207,10 @@ const Header = () => {
             className="flex items-center gap-2 absolute left-1/2 -translate-x-1/2"
           >
             <img
-              src={logo}
+              src={activeLogo}
               alt="K&G"
-              className="h-10 sm:h-12 object-contain"
+              className="h-80 w-80 object-contain transition-opacity duration-200"
             />
-
-            <span
-              className={`hidden md:block text-5xl ${headerTextColor}`}
-            >
-              KEEP ON GOING
-            </span>
           </Link>
 
           {/* Search button */}
@@ -193,11 +230,10 @@ const Header = () => {
       {/* Mobile full-screen menu overlay */}
       {isMobile && menuOpen && (
         <div className="fixed inset-0 z-[110] bg-background animate-fade-in flex flex-col overflow-y-auto">
-          {/* Mobile menu header */}
           <div className="flex h-[72px] shrink-0 items-center justify-between border-b px-6">
             <Link to="/" onClick={() => setMenuOpen(false)}>
               <img
-                src={logo}
+                src={logoDark}
                 alt="K&G"
                 className="h-10 w-auto object-contain"
               />
@@ -213,7 +249,6 @@ const Header = () => {
             </button>
           </div>
 
-          {/* Mobile menu links */}
           <MenuList onClose={() => setMenuOpen(false)} />
         </div>
       )}
@@ -242,7 +277,9 @@ const Header = () => {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyDown={(e) => {
-                    if (e.key === "Escape") setSearchOpen(false);
+                    if (e.key === "Escape") {
+                      setSearchOpen(false);
+                    }
                   }}
                   placeholder="Search products..."
                   className="flex-1 bg-transparent text-lg font-body outline-none placeholder:text-muted-foreground"

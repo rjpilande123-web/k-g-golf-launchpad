@@ -42,6 +42,7 @@ const Index = () => {
           aria-label="K&G golf apparel background"
         />
 
+        
         <section className="w-full bg-white px-6 py-16 md:py-24">
           <div className="mx-auto max-w-5xl text-center space-y-6">
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
@@ -63,20 +64,21 @@ const Index = () => {
             <div className="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
               <a
                 href="/products"
-                className="inline-flex items-center justify-center w-full sm:w-auto min-w-[160px] px-8 py-3 bg-black text-white font-semibold transition-colors hover:bg-neutral-800"
+                className="inline-flex items-center justify-center w-full sm:w-auto min-w-[160px] px-8 py-3 rounded-full border border-black bg-transparent text-black font-semibold transition-colors duration-300 hover:bg-black hover:text-white"
               >
                 Discover
               </a>
 
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center w-full sm:w-auto min-w-[160px] px-8 py-3 border border-black text-black font-semibold transition-colors hover:bg-black hover:text-white"
+                className="inline-flex items-center justify-center w-full sm:w-auto min-w-[160px] px-8 py-3 rounded-full border border-black bg-transparent text-black font-semibold transition-colors duration-300 hover:bg-black hover:text-white"
               >
                 Contact Us
               </a>
             </div>
           </div>
         </section>
+
 
         <ImageCarousel />
 

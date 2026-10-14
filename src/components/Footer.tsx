@@ -1,3 +1,4 @@
+
 import { Phone, Mail, Building2 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -5,11 +6,12 @@ import kngLogo from "@/assets/footer-logo.jpg";
 import philippinesFlag from "@/assets/images/philippines-flag.png";
 
 const Footer = () => {
+  const hoverClass = "transition-colors duration-200 hover:text-black";
+
   return (
     <footer className="w-full bg-white text-[#737373]">
       {/* Main footer */}
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12 md:px-10 md:py-16">
-
         {/* Column 1: Help */}
         <div>
           <h3 className="mb-6 text-lg font-bold">Help</h3>
@@ -17,7 +19,7 @@ const Footer = () => {
           <div className="space-y-5 text-sm">
             <a
               href="tel:0085261588111"
-              className="flex items-start gap-3 transition-colors hover:text-white"
+              className={`flex items-start gap-3 ${hoverClass}`}
             >
               <Phone size={18} className="mt-0.5 shrink-0" />
               <span>00852-61588111</span>
@@ -25,7 +27,7 @@ const Footer = () => {
 
             <a
               href="mailto:inquiries@keepgoinggolf.com"
-              className="flex items-start gap-3 transition-colors hover:text-white"
+              className={`flex items-start gap-3 ${hoverClass}`}
             >
               <Mail size={18} className="mt-0.5 shrink-0" />
               <span className="break-all">
@@ -50,18 +52,12 @@ const Footer = () => {
 
           <ul className="space-y-4 text-sm">
             <li>
-              <Link
-                to="/personalization"
-                className="transition-colors hover:text-white"
-              >
+              <Link to="/contact" className={hoverClass}>
                 Personalization
               </Link>
             </li>
             <li>
-              <Link
-                to="/events"
-                className="transition-colors hover:text-white"
-              >
+              <Link to="/contact" className={hoverClass}>
                 Events
               </Link>
             </li>
@@ -75,30 +71,30 @@ const Footer = () => {
           <ul className="space-y-4 text-sm">
             <li>
               <a
-                href="https://www.facebook.com/"
+                href="https://www.facebook.com/GolfKNG/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-colors hover:text-white"
+                className={hoverClass}
               >
                 Facebook
               </a>
             </li>
             <li>
               <a
-                href="https://www.instagram.com/"
+                href="https://www.instagram.com/golfkng/?hl=en"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-colors hover:text-white"
+                className={hoverClass}
               >
                 Instagram
               </a>
             </li>
             <li>
               <a
-                href="https://www.twitter.com/"
+                href="https://x.com/GolfKNG"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-colors hover:text-white"
+                className={hoverClass}
               >
                 Twitter
               </a>
@@ -112,34 +108,22 @@ const Footer = () => {
 
           <ul className="space-y-4 text-sm">
             <li>
-              <Link
-                to="/about"
-                className="transition-colors hover:text-white"
-              >
+              <Link to="/about" className={hoverClass}>
                 About Us
               </Link>
             </li>
             <li>
-              <Link
-                to="/contact"
-                className="transition-colors hover:text-white"
-              >
+              <Link to="/contact" className={hoverClass}>
                 Contact Us
               </Link>
             </li>
             <li>
-              <Link
-                to="/faqs"
-                className="transition-colors hover:text-white"
-              >
+              <Link to="/faqs" className={hoverClass}>
                 FAQs
               </Link>
             </li>
             <li>
-              <Link
-                to="/terms"
-                className="transition-colors hover:text-white"
-              >
+              <Link to="/terms" className={hoverClass}>
                 Terms &amp; Conditions
               </Link>
             </li>
@@ -161,7 +145,11 @@ const Footer = () => {
           </div>
 
           {/* K&G Logo */}
-          <Link to="/" aria-label="K&G Home">
+          <Link
+            to="/"
+            aria-label="K&G Home"
+            className="transition-opacity duration-200 hover:opacity-75"
+          >
             <img
               src={kngLogo}
               alt="K&G Keep On Going"

@@ -5,6 +5,53 @@
   text-align: center;
 }
 
+
+/* Public Sans — Regular */
+@font-face {
+  font-family: "Public Sans";
+  src: url("/Public_Sans/static/PublicSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Public Sans — Light */
+@font-face {
+  font-family: "Public Sans";
+  src: url("/Public_Sans/static/PublicSans-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Public Sans — Bold */
+@font-face {
+  font-family: "Public Sans";
+  src: url("/Public_Sans/static/PublicSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Public Sans — Black */
+@font-face {
+  font-family: "Public Sans";
+  src: url("/Public_Sans/static/PublicSans-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Public Sans — Italic */
+@font-face {
+  font-family: "Public Sans";
+  src: url("/Public_Sans/static/PublicSans-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+
 .logo {
   height: 6em;
   padding: 1.5em;

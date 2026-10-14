@@ -6,7 +6,7 @@ const ContactUs = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="pt-24">
+      <main className="pt-20">
         {/* Hero */}
         <section className="relative bg-foreground text-background px-6 py-24">
           <div className="max-w-[900px] mx-auto text-center">
